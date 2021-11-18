@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Signal Processing Project</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <style>
+    .input-group{
+      width: 90%;
+      margin: auto;
+    }
+    .input-bar, .plot{
+      display: inline-block;
+      text-align: center;
+    }
+    .input-bar{
+      width: 30%;
+    }
+    .plot{
+      width: 60%;
+      height: 600px;
+    }
+    .plot img{
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="input-bar">
+    <h3>Input Parameters:</h3>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">vx</span>
+      </div>
+      <input id="vx" type="text" class="form-control" value="4">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">vy</span>
+      </div>
+      <input id="vy" type="text" class="form-control" value="0">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">x0</span>
+      </div>
+      <input id="x0" type="text" class="form-control" value="0">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">y0</span>
+      </div>
+      <input id="y0" type="text" class="form-control" value="0">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Recording Length</span>
+      </div>
+      <input id="rl" type="text" class="form-control" value="0.5">
+    </div>
+
+     <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Time Interval</span>
+      </div>
+      <input id="ti" type="text" class="form-control" value="0.0001">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Object size</span>
+      </div>
+      <input id="os" type="text" class="form-control" value="0.078">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Capture Rate</span>
+      </div>
+      <input id="cr" type="text" class="form-control" value="100">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Holding Factor</span>
+      </div>
+      <input id="hf" type="text" class="form-control" value="0.1">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Pixel Size</span>
+      </div>
+      <input id="ps" type="text" class="form-control" value="0.0078">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Fill Factor</span>
+      </div>
+      <input id="ff" type="text" class="form-control" value="0.5">
+    </div>
+
+    <div class="input-group mb-3">
+      <button type="button" class="btn btn-outline-info on" id="aa">Antialising On</button>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Antialiasing Factor</span>
+      </div>
+      <input id="aaf" type="text" class="form-control" value="3">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Luminance</span>
+      </div>
+      <input id="lu" type="text" class="form-control" value="1">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">wl</span>
+      </div>
+      <input id="wl" type="text" class="form-control" value="30">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">ul</span>
+      </div>
+      <input id="ul" type="text" class="form-control" value="20">
+    </div>
+
+    <button type="button" class="btn btn-dark" id="submit">Submit</button>
+  </div>
+  <div class="plot"></div>
+
+  <script>
+    $(document).ready(function() {
+      $("#aa").button().click(function() {
+        on = $("#aa").hasClass("on")
+        console.log(on)
+        if (!on) {
+          $("#aa").text("Antialiasing On")
+          $("#aa").addClass("on")
+        } else {
+          $("#aa").text("Antialiasing Off")
+          $("#aa").removeClass("on")
+        }
+      });
+
+      $("#submit").button().click(function(){
+        $(".plot").empty();
+        vx = $("#vx").val()
+        vy = $("#vy").val()
+        x0 = $("#x0").val()
+        y0 = $("#y0").val()
+        rl = $("#rl").val()
+        ti = $("#ti").val()
+        os = $("#os").val()
+        cr = $("#cr").val()
+        hf = $("#hf").val()
+        ps = $("#ps").val()
+        ff = $("#ff").val()
+        aa = $("#aa").hasClass("on")
+        aaf = $("#aaf").val()
+        lu = $("#lu").val()
+        wl = $("#wl").val()
+        ul = $("#ul").val()
+        console.log(`[${vx}, ${vy}, ${x0}, ${y0}, ${rl}, ${ti}, ${os}, ${cr}, ${hf}, ${ps}, ${ff}, ${aa}, ${aaf}]`)
+        load(`http://127.0.0.1:3000/graph3/?params=[${vx}, ${vy}, ${x0}, ${y0}, ${rl}, ${ti}, ${os}, ${cr}, ${hf}, ${ps}, ${ff}, ${aa}, ${aaf}]`);
+        load(`http://127.0.0.1:3000/graph4/?params=[${vx}, ${vy}, ${x0}, ${y0}, ${rl}, ${ti}, ${os}, ${cr}, ${hf}, ${ps}, ${ff}, ${aa}, ${aaf}]`);
+        load(`http://127.0.0.1:3000/graph5/?params=[${vx}, ${vy}, ${x0}, ${y0}, ${rl}, ${ti}, ${os}, ${cr}, ${hf}, ${ps}, ${ff}, ${aa}, ${aaf}, ${lu}, ${wl}, ${ul}]`);
+        load(`http://127.0.0.1:3000/graph6/?params=[${vx}, ${vy}, ${x0}, ${y0}, ${rl}, ${ti}, ${os}, ${cr}, ${hf}, ${ps}, ${ff}, ${aa}, ${aaf}, ${lu}, ${wl}, ${ul}]`);
+      }); 
+    });
+
+    function load(url) {
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+        console.log(xhttp.readyState)
+        if (xhttp.readyState === 4) {
+          console.log(xhttp.response)
+          var image = new Image();
+          image.src = 'data:image/png;base64,' + xhttp.response;
+          $(".plot").append(image);
+        }
+      }
+
+      xhttp.open("GET", url, true);
+      xhttp.send();
+    }
+
+      
+    // load("http://127.0.0.1:3000/line/?vx=2&vy=1");
+    // load("http://127.0.0.1:3000/sample/?vx=2&vy=1");
+  </script>
+</body>
+</html>

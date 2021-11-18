@@ -5,9 +5,6 @@
   <title>Signal Processing Project</title>
   <script src="https://unpkg.com/mathjs@9.5.1/lib/browser/math.js"></script>
   <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <style>
     input[type=text] {
@@ -52,6 +49,7 @@
         var image = new Image();
         image.src = 'data:image/png;base64,' + xhttp.response;
         document.body.appendChild(image);
+        console.log(image)
       }
     }
 
